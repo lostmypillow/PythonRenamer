@@ -2,16 +2,20 @@ import os, sys
 def modify_name(pname):
     base = os.path.basename(pname)
     list = os.path.splitext(base)
-    modifier = list[0]
-    queue[1] = modifier
+    queue[1] = list[0]
     print(queue)
 def renaming(dict, entry):
     var = dict[entry]
-    print(var.find("128"), var.find("wool"))
+    splitvar = var.split(".")
+    split.append(splitvar)
 queue = {}
+split =[]
 ask = input("hi:")
 modify_name(ask)
 renaming(queue, 1)
+
+
+#test path: usr/local/bin.128AAC.aac
 
 # First go to the directory
 os.chdir(ask)
