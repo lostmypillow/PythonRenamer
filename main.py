@@ -1,4 +1,4 @@
-import os
+import os, sys
 def modify_name(pname):
     base = os.path.basename(pname)
     list = os.path.splitext(base)
@@ -7,6 +7,21 @@ def modify_name(pname):
 ask = input("hi:")
 modify_name(ask)
 
+# First go to the directory
+os.chdir(ask)
+
+# Print current working directory
+print ("Current working dir : %s" % os.getcwd())
+
+# Now open a directory "/tmp"
+fd = os.open( "/tmp", os.O_RDONLY )
+
+# Use os.fchdir() method to change the dir
+os.fchdir(fd)
+
+# Print current working directory
+print ("Current working dir : %s" % os.getcwd())
+
 
 
 #Renaming process
@@ -14,7 +29,7 @@ modify_name(ask)
 #$ python
 #>>> import os
 #>>> for filename in os.listdir("."):
-#...  if filename.startswith("cheese_"):
+#...  if filename.endswith("cheese_"):
 #...    os.rename(filename, filename[7:])
 #...
 #>>>
