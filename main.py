@@ -3,9 +3,15 @@ def modify_name(pname):
     base = os.path.basename(pname)
     list = os.path.splitext(base)
     modifier = list[0]
-    print(modifier)
+    queue[1] = modifier
+    print(queue)
+def renaming(dict, entry):
+    var = dict[entry]
+    print(var.find("128"), var.find("wool"))
+queue = {}
 ask = input("hi:")
 modify_name(ask)
+renaming(queue, 1)
 
 # First go to the directory
 os.chdir(ask)
