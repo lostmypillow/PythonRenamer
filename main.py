@@ -3,25 +3,24 @@ def modify_name(pname):
     base = os.path.basename(pname)
     list = os.path.splitext(base)
     no_ext = list[0]
-    split_ext = no_ext.split(".")
-    print(split_ext)
-    
-def renaming(dict, entry):
-    var = dict[entry]
-    splitvar = var.split(".")
-    split.append(splitvar)
+    s1 = no_ext.split(".")
+    s2 = "".join(s1)
+    s3 = s2.split("(")
+    print(s3)
+    if "128AAC)" in s3:
+        s3.remove("128AAC)")
+        print(s3)
+    join = "".join(s3)
+    print(join + list[1])
+#ask for input in which the files are located
 ask = input("Directory in which the files are in:")
-
-#for x in filenames:
 modify_name(ask)
-renaming(queue, 1)
-
 
 #test path: usr/local/b.i.n(128AAC).aac
 os.chdir(ask)
 
 split =[]
-ask = input("Directory in which the files are in:")
+
 os.chdir(ask)
 filenames = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 # First go to the directory
