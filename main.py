@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, shutil
 #from os import listdir
 #from os.path import isfile, join
 def modify_name(pname, liist, w_dot):
@@ -9,6 +9,7 @@ def modify_name(pname, liist, w_dot):
     s2 = "".join(s1)
     w_dot.append(s2)
     w_dot.append(liist[1])
+    
 def remove_text_inside_brackets(text, brackets="()[]"):
     count = [0] * (len(brackets) // 2) # count open/close brackets
     saved_chars = []
@@ -25,54 +26,42 @@ def remove_text_inside_brackets(text, brackets="()[]"):
             if not any(count): # outside brackets
                 saved_chars.append(character)
     return ''.join(saved_chars)
-def remove2(x, lost):
-    print(x[1:-1] + lost[1])
-   
+
+def remove2(x, lost, altar):
+    altar.append(x[1:-1] + lost[1])
+
+def main(filenamee, newname):
+	# make a duplicate of an existing file
+    if path.exists(filenamee):
+	# get the path to the file in the current directory
+        src = path.realpath(filenamee);
+		
+	# rename the original file
+        os.rename(filenamee,newname)
+    
 
 list = []
+
 no_dot = []
+
+alter = []
+
 #ask for input in which the files are located
 ask = input("File path")
-onlyfiles = [f for f in listdir(ask) if isfile(join(ask, f))]
-print(onlyfiles)
+ask_base = os.path.basename(ask)
+
+#onlyfiles = [f for f in listdir(ask) if isfile(join(ask, f))]
+#print(onlyfiles)
+
 modify_name(ask, list, no_dot)
 e =repr(remove_text_inside_brackets(no_dot[0]))
-remove2(e, no_dot)
+remove2(e, no_dot, alter)
 
+		
+if __name__ == "__main__":
+    main(ask_base, alter[0])
 
 
 
 #test path: usr/local/b.i.n(128AAC).aac
-os.chdir(ask)
 
-split =[]
-
-os.chdir(ask)
-# First go to the directory
-os.chdir(ask)
-
-# Print current working directory
-print ("Current working dir : %s" % os.getcwd())
-
-# Now open a directory "/tmp"
-fd = os.open( "/tmp", os.O_RDONLY )
-
-# Use os.fchdir() method to change the dir
-os.fchdir(fd)
-
-# Print current working directory
-print ("Current working dir : %s" % os.getcwd())
-
-
-
-#Renaming process
-#$ ls
-#$ python
-#>>> import os
-#>>> for filename in os.listdir("."):
-#...  if filename.endswith("cheese_"):
-#...    os.rename(filename, filename[7:])
-#...
-#>>>
-#$ ls
-#cheese_type.bar  cheese_type.foo
