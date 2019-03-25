@@ -1,4 +1,6 @@
 import os, sys
+#from os import listdir
+#from os.path import isfile, join
 def modify_name(pname, liist, w_dot):
     base = os.path.basename(pname)
     liist = os.path.splitext(base)
@@ -30,10 +32,14 @@ def remove2(x, lost):
 list = []
 no_dot = []
 #ask for input in which the files are located
-ask = input("Directory in which the files are in:")
+ask = input("File path")
+onlyfiles = [f for f in listdir(ask) if isfile(join(ask, f))]
+print(onlyfiles)
 modify_name(ask, list, no_dot)
 e =repr(remove_text_inside_brackets(no_dot[0]))
 remove2(e, no_dot)
+
+
 
 
 #test path: usr/local/b.i.n(128AAC).aac
