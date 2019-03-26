@@ -1,16 +1,20 @@
-import os, sys, shutil
+import os, sys, shutil, fnmatch
 #from os import listdir
 #from os.path import isfile, join
 def modify_name(pname, liist, w_dot):
+    num = 0
+    print("Extracting filename...")
     base = os.path.basename(pname)
     liist = os.path.splitext(base)
-    no_ext = liist[0]
+    no_ext = liist[num]
     s1 = no_ext.split(".")
     s2 = "".join(s1)
     w_dot.append(s2)
-    w_dot.append(liist[1])
+    w_dot.append(liist[num])
+    num += 2
     
 def remove_text_inside_brackets(text, brackets="()[]"):
+    print("Removing brackets...")
     count = [0] * (len(brackets) // 2) # count open/close brackets
     saved_chars = []
     for character in text:
@@ -28,18 +32,13 @@ def remove_text_inside_brackets(text, brackets="()[]"):
     return ''.join(saved_chars)
 
 def remove2(x, lost, altar):
-    altar.append(x[1:-1] + lost[1])
+    nume = 1
+    altar.append((x[1:-1] + lost[nume]))
+    nume += 2
 
-def main(filenamee, newname):
-	# make a duplicate of an existing file
-    if path.exists(filenamee):
-	# get the path to the file in the current directory
-        src = path.realpath(filenamee);
-		
-	# rename the original file
-        os.rename(filenamee,newname)
+
     
-
+print("Program start")
 list = []
 
 no_dot = []
@@ -47,21 +46,27 @@ no_dot = []
 alter = []
 
 #ask for input in which the files are located
-ask = input("File path")
-ask_base = os.path.basename(ask)
 
-#onlyfiles = [f for f in listdir(ask) if isfile(join(ask, f))]
-#print(onlyfiles)
-
-modify_name(ask, list, no_dot)
-e =repr(remove_text_inside_brackets(no_dot[0]))
-remove2(e, no_dot, alter)
-
-		
-if __name__ == "__main__":
-    main(ask_base, alter[0])
-
-
-
-#test path: usr/local/b.i.n(128AAC).aac
+ask = input("File path:")
+x = []
+for file in os.listdir(ask):
+    if fnmatch.fnmatch(file, '*.m4a'):
+        x.append(file)
+print(x)
+for f in x:
+    if 1 == 1:
+        num = 0
+        try:
+            f_base = os.path.basename(f)
+            modify_name(f, list, no_dot)
+            print("modify_name() executed" + f)
+            e = repr(remove_text_inside_brackets(no_dot[0]))
+            remove2(e, no_dot, alter)
+            print("remove2 executed" + f)
+            os.rename(f_base, alter[num])
+            print("osrename executed" + f)
+            except
+                continue
+        num += 1
+        print("Rename successful!" + f)
 
